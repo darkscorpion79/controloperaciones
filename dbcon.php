@@ -1,7 +1,7 @@
 <?php
 	
 	// Creamos las variables de conexión
-	$servername = "localhost";
+	$servername = "31.170.167.52";
 	$username = "u826340212_orangedb";
 	$password = "Cwo9982061148";
 	$database = "u826340212_orangedb";

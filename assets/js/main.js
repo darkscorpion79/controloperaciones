@@ -16,14 +16,13 @@
 			var servicio = $("#servicio").val();
 			var cantidad = $("#cantidad").val();
 			var fechainicial = $("#fechaini").val();
-			var fechafinal=$("#fechafin").val();
-			cadena= "&cliente="+cliente+
-				    "&servicio="+servicio+
-					"&cantidad="+cantidad+
-					"&fechainicial="+fechainicial+
-					"&fechafinal="+fechafinal;
-			
-			
+			var fechafinal = $("#fechafin").val();
+			var cadena = "&cliente="+cliente+
+				"&servicio="+servicio+
+				"&cantidad="+cantidad+
+				"&fechainicial="+fechainicial+
+				"&fechafinal="+fechafinal;
+
 			if(cliente !=="" && servicio !=="" && cantidad !=="" && fechainicial !=="" && fechafinal !==""){
 				$.ajax({
 					url : "accion.php",
@@ -31,15 +30,22 @@
 					cache: false,
 					data : cadena,
 					success:function(data){
-						alert("Datos insertados correctamente"+cadena);
-						$("#clienteForm")[0].reset();
-						loadTableData();
+						if(data.indexOf("success") !== -1){
+							alert("Datos insertados correctamente");
+							$("#clienteForm")[0].reset();
+							loadTableData();
+						} else {
+							alert("Hubo un error guardando: " + data);
+						}
 					},
+					error: function(xhr, status, error){
+						alert("Error de conexión AJAX: " + error);
+					}
 				});
 			}else{
 				alert("Todos los campos son obligatorios");
 			}
-		});	
+		});
 
 		// Eliminar registro a MySql desde PHP usando jQuery AJAX
 		$(document).on("click",".borrar-btn",function(){
